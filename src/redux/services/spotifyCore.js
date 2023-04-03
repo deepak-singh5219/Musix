@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import axios from 'axios';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://spotify23.p.rapidapi.com',
@@ -33,10 +32,21 @@ export const spotifyApi = createApi({
         },
       }),
     }),
-    
+    getAlbumTracks: builder.query({
+      query: () => ({
+        url: '/album_tracks/',
+        method: 'GET',
+        params: {
+          id: '3IBcauSj5M2A6lTeffJzdv',
+          offset: '0',
+          limit: '300',
+        },
+      }),
+    }),
   }),
 });
 
 export const {
   useGetAlbumsQuery,
+  useGetAlbumTracksQuery,
 } = spotifyApi;
