@@ -43,10 +43,20 @@ export const spotifyApi = createApi({
         },
       }),
     }),
+    getPlaylists: builder.query({
+      query: () => ({
+        url: '/playlist/',
+        method: 'GET',
+        params: {
+          id: '37i9dQZF1DX4Wsb4d7NKfP',
+        },
+      }),
+    }),
   }),
 });
 
 export const {
   useGetAlbumsQuery,
   useGetAlbumTracksQuery,
+  useGetPlaylistsQuery,
 } = spotifyApi;

@@ -1,10 +1,13 @@
 import {Error, Loader, SongCard} from '../components';
 import { genres } from '../assets/constants';
-import { useGetAlbumsQuery } from '../redux/services/spotifyCore';
+import { useGetAlbumTracksQuery, useGetAlbumsQuery, useGetPlaylistsQuery } from '../redux/services/spotifyCore';
 
 const Discover = () => {
-  const {data, isFetching, error} = useGetAlbumsQuery();
-  console.log(data);
+    // const {data, isFetching, error} = useGetAlbumsQuery();
+    // const {data, isFetching, error} = useGetAlbumTracksQuery();
+    const {data, isFetching, error} = useGetPlaylistsQuery();
+    console.log(data);
+    
  
   return (
     <div className="flex flex-col">
