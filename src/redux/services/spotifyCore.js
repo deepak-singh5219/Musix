@@ -52,6 +52,14 @@ export const spotifyApi = createApi({
         },
       }),
     }),
+    getPlaylistTracks: builder.query({
+      query: () => ({
+        url: '/playlist_tracks/',
+        method: 'GET',
+        params: {id: '37i9dQZF1DX4Wsb4d7NKfP', offset: '0', limit: '100'}, 
+      })
+      
+    })
   }),
 });
 
@@ -59,4 +67,5 @@ export const {
   useGetAlbumsQuery,
   useGetAlbumTracksQuery,
   useGetPlaylistsQuery,
+  useGetPlaylistTracksQuery
 } = spotifyApi;
