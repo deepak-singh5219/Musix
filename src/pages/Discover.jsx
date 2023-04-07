@@ -1,14 +1,16 @@
 import {Error, Loader, SongCard} from '../components';
 import { genres } from '../assets/constants';
-import { useGetAlbumTracksQuery, useGetAlbumsQuery, useGetPlaylistsQuery } from '../redux/services/spotifyCore';
+import { useGetAlbumTracksQuery, useGetAlbumsQuery, useGetPlaylistTracksQuery, useGetPlaylistsQuery } from '../redux/services/spotifyCore';
 
 const Discover = () => {
-    // const {data, isFetching, error} = useGetAlbumsQuery();
-    // const {data, isFetching, error} = useGetAlbumTracksQuery();
-    const {data, isFetching, error} = useGetPlaylistsQuery();
-    console.log(data);
+    const {data, isFetching, error} = useGetPlaylistTracksQuery();
     
- 
+    console.log(data);
+    if(isFetching) return <Loader/>;
+    if(error) return <Error/>;
+
+    const {items} = data;
+
   return (
     <div className="flex flex-col">
       <div className="w-full flex flex-col sm:flex-row items-center justify-between mt-4 mb-10">
@@ -22,7 +24,7 @@ const Discover = () => {
       </div>
 
       <div className="flex flex-wrap sm:justify-start justify-center gap-8">
-        { [1, 2, 3, 4, 5, 6, 7, 8].map((song, i) =>
+        {items.map((song, i) =>
  <SongCard
           key={song.key}
           song={song}
