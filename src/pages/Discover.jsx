@@ -1,10 +1,13 @@
 import {Error, Loader, SongCard} from '../components';
 import { genres } from '../assets/constants';
 import { useGetAlbumTracksQuery, useGetAlbumsQuery, useGetPlaylistTracksQuery, useGetPlaylistsQuery } from '../redux/services/spotifyCore';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 const Discover = () => {
+  const dispatch = useDispatch();
+  const { activeSong, isPlaying } = useSelector((state) => state.player);
     const {data, isFetching, error} = useGetPlaylistTracksQuery();
-    
     console.log(data);
     if(isFetching) return <Loader/>;
     if(error) return <Error/>;
@@ -25,10 +28,13 @@ const Discover = () => {
 
       <div className="flex flex-wrap sm:justify-start justify-center gap-8">
         {items.map((song, i) =>
- <SongCard
+         <SongCard
           key={song.key}
           song={song}
           i={i}
+          isPlaying={isPlaying}
+          activeSong={activeSong}
+          data={data}
           />
           )}  
       </div>
