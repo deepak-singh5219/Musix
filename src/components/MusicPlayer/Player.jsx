@@ -19,10 +19,10 @@ const Player = ({ activeSong, isPlaying, volume, seekTime, onEnded, onTimeUpdate
   useEffect(() => {
     ref.current.currentTime = seekTime;
   }, [seekTime]);
-
+  
   return (
     <audio
-      src={activeSong?.hub?.actions[1]?.uri}
+      src={activeSong?.track?.preview_url}
       ref={ref}
       loop={repeat}
       onEnded={onEnded}
