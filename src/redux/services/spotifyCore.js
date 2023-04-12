@@ -10,13 +10,6 @@ const baseQuery = fetchBaseQuery({
     headers.set('X-RapidAPI-Key', 'e824587f6dmsh639569ffbc02a34p1e1278jsnfa23b31c52c4');
     return headers;
   },
-  // Add URL query params using the `prepareParams` option
-  prepareParams: () => {
-    const parameters = {
-      ids: '3IBcauSj5M2A6lTeffJzdv',
-    };
-    return parameters;
-  },
 });
 
 export const spotifyApi = createApi({
@@ -57,9 +50,15 @@ export const spotifyApi = createApi({
         url: '/playlist_tracks/',
         method: 'GET',
         params: {id: '37i9dQZF1DX4Wsb4d7NKfP', offset: '0', limit: '100'}, 
+      }),  
+    }),
+      getGenre: builder.query({
+        query: () => ({
+        method: 'GET',
+        url: 'https://spotify23.p.rapidapi.com/genre_view/',
+        params: {id: '0JQ5DAqbMKFEC4WFtoNRpw', content_limit: '10', limit: '20'},
+        }) 
       })
-      
-    })
   }),
 });
 
@@ -67,5 +66,6 @@ export const {
   useGetAlbumsQuery,
   useGetAlbumTracksQuery,
   useGetPlaylistsQuery,
-  useGetPlaylistTracksQuery
+  useGetPlaylistTracksQuery,
+  useGetGenreQuery
 } = spotifyApi;
