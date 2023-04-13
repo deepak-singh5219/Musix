@@ -54,11 +54,11 @@ export const spotifyApi = createApi({
     }),
       getGenre: builder.query({
         query: () => ({
+        url: '/genre_view/',
         method: 'GET',
-        url: 'https://spotify23.p.rapidapi.com/genre_view/',
         params: {id: '0JQ5DAqbMKFEC4WFtoNRpw', content_limit: '10', limit: '20'},
-        }) 
-      })
+        }),
+      }),
   }),
 });
 

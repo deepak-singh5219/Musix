@@ -38,7 +38,7 @@ const SongCard = (props) => {
       </Link>
     </p>
     <p className="text-sm text-gray-300 mt-1 truncate">
-      <Link to={song?.track?.artists?`/artists/${song?.track?.artists[0]?.id}`:'/top-artists'}>
+      <Link to={(song?.track?.artists)?`/artists/${song?.track?.artists[0]?.id}`:'/top-artists'}>
       {song?.track?.artists[0]?.name}
       </Link>
     </p>
