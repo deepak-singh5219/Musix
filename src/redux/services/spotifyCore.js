@@ -59,6 +59,20 @@ export const spotifyApi = createApi({
         params: {id: '0JQ5DAqbMKFEC4WFtoNRpw', content_limit: '10', limit: '20'},
         }),
       }),
+      getTracks: builder.query({
+        query: () => ({
+        url: '/tracks/',
+        method: 'GET',
+        params: {ids: '4WNcduiCmDNfmTEz7JvmLv'},
+        }),
+      }),
+      getTrackLyrics: builder.query({
+        query: (songId) => ({
+        url: '/track_lyrics/',
+        method: 'GET',
+        params: {id: songId },
+        }),
+      }),
   }),
 });
 
@@ -67,5 +81,6 @@ export const {
   useGetAlbumTracksQuery,
   useGetPlaylistsQuery,
   useGetPlaylistTracksQuery,
-  useGetGenreQuery
+  useGetGenreQuery,
+  useGetTrackLyricsQuery
 } = spotifyApi;
