@@ -11,9 +11,33 @@ import { useGetPlaylistTracksQuery } from "../redux/services/spotifyCore";
 
 
 const TopChartCard = (props) => {
-  const {song,i} = props;
+  const {song,i,isPlaying,activeSong,handlePlayClick,handlePauseClick} = props;
   return (
-    <div className='w-full flex flex-row items-center hover:bg-[#4c426e] py-2 p-4 rounded-lg cursor-pointer mb-2'>{song.name}</div>
+    <div className='w-full flex flex-row items-center hover:bg-[#4c426e] py-2 p-4 rounded-lg cursor-pointer mb-2'>
+      <h3 className="font-bold text-base text-white mr-3">{i+1}</h3>
+      <div className="flex flex-1 flex-row justify-between items-center">
+        <img className="w-16 h-16 rounded-lg" src={song?.track?.album?.images[0].url} alt="" />
+        <div className="flex flex-1 flex-col justify-center mx-3">
+        <p className="text-md font-bold text-white">
+          <Link to={`/songs/${song?.track?.id}`}>
+            {song?.track?.name}
+          </Link>
+       </p>
+       <p className="text-sm text-gray-300 mt-1 truncate">
+         <Link to={(song?.track?.artists)?`/artists/${song?.track?.artists[0]?.id}`:'/top-artists'}>
+           {song?.track?.artists[0]?.name}
+         </Link>
+      </p>
+        </div>
+      </div>
+      <PlayPause
+       isPlaying={isPlaying}
+       activeSong={activeSong}
+       song={song}
+       handlePause={handlePauseClick}
+       handlePlay={() => handlePlayClick(song,i)}
+      />
+      </div>
   )
 }
 
@@ -26,9 +50,10 @@ const TopPlay = () => {
     if(error) return <div></div>;
 
     const {items} = data;
-    const topPlays = items.slice(items.length-5);
+    const topPlays = items.slice(items.length-10);
+    const topCharts = items.slice(45,50);
 
-  const handlePlayClick = () => {
+  const handlePlayClick = (song,i) => {
     dispatch(setActiveSong({song,data,i}));
     dispatch(playPause(true));
   };
@@ -51,7 +76,17 @@ const TopPlay = () => {
 
         <div className="flex flex-col gap-1 mt-4">
           {
-            topPlays?.map((item,i) => <TopChartCard key={item.track.id} song={item.track} i={i}/>)
+            topCharts?.map((item,i) => 
+            <TopChartCard 
+            key={item.track.id} 
+            song={item} 
+            i={i}
+            isPlaying={isPlaying}
+            activeSong={activeSong}
+            handlePlayClick={handlePlayClick}
+            handlePauseClick={handlePauseClick}
+            />
+            )
           }
         </div>
 
@@ -79,7 +114,7 @@ const TopPlay = () => {
               topPlays?.map((item,i)=> (
                 <SwiperSlide
                 key={item?.track.id}
-                style={{width:'25%', height:'auto'}}
+                style={{width:'20%', height:'auto'}}
                 className="shadow-lg rounded-full animate-slideright"
                 >
                 <Link to={(item?.track?.artists)?`/artists/${item?.track?.artists[0]?.id}`:'/top-artists'}>
