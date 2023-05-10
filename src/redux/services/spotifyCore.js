@@ -80,6 +80,13 @@ export const spotifyApi = createApi({
         params: {id: artistId },
         }),
       }),
+      getConcerts: builder.query({
+        query: () => ({
+        url: '/concerts/',
+        method: 'GET',
+        params: {gl: 'US'},
+        }),
+      }),
   }),
 });
 
@@ -90,5 +97,6 @@ export const {
   useGetPlaylistTracksQuery,
   useGetGenreQuery,
   useGetTrackLyricsQuery,
-  useGetArtistDetailsQuery
+  useGetArtistDetailsQuery,
+  useGetConcertsQuery
 } = spotifyApi;
