@@ -6,9 +6,6 @@ import { playPause, setActiveSong } from "../redux/features/playerSlice";
 const SongCard = (props) => {
   const {song,i,isPlaying,activeSong,data} = props;
   const dispatch = useDispatch();
-  // console.log(song)
-
-
   const handlePlayClick = () => {
     dispatch(setActiveSong({song,data,i}));
     dispatch(playPause(true));
@@ -33,9 +30,11 @@ const SongCard = (props) => {
    </div>
    <div className="mt-4 flex flex-col">
     <p className="font-semibold text-lg text-white truncate">
-      <Link to={`/songs/${song?.track?.id}`}>
+    <Link
+      to={`/songs/${song?.track?.id}`}
+      state={{song}}>
       {song?.track?.name}
-      </Link>
+   </Link>
     </p>
     <p className="text-sm text-gray-300 mt-1 truncate">
       <Link to={(song?.track?.artists)?`/artists/${song?.track?.artists[0]?.id}`:'/top-artists'}>
