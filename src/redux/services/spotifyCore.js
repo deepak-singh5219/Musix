@@ -73,6 +73,13 @@ export const spotifyApi = createApi({
         params: {id: songId },
         }),
       }),
+      getArtistDetails: builder.query({
+        query: (artistId) => ({
+        url: '/artist_overview/',
+        method: 'GET',
+        params: {id: artistId },
+        }),
+      }),
   }),
 });
 
@@ -82,5 +89,6 @@ export const {
   useGetPlaylistsQuery,
   useGetPlaylistTracksQuery,
   useGetGenreQuery,
-  useGetTrackLyricsQuery
+  useGetTrackLyricsQuery,
+  useGetArtistDetailsQuery
 } = spotifyApi;
