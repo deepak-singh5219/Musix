@@ -6,6 +6,8 @@ import { Provider } from 'react-redux';
 import './index.css';
 import App from './App';
 import { store } from './redux/store';
+import { ConcertRoutes } from './pages/Concerts';
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

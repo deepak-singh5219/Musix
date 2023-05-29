@@ -5,6 +5,8 @@ import SongDetails from './SongDetails';
 import Search from './Search';
 import TopCharts from './TopCharts';
 import Concerts from './Concerts';
+import ConcertDetails from './ConcertDetails';
+
 
 export {
   Discover,
@@ -14,4 +16,5 @@ export {
   SongDetails,
   TopCharts,
   Concerts,
+  ConcertDetails
 };
